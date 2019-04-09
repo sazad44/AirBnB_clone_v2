@@ -30,7 +30,7 @@ def do_deploy(archive_path):
     if result.failed:
         return False
     with cd('/tmp'):
-        result = run("tar -xzf {} -C /data/web_static/releases/{}/"
+        result = run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
                      .format(fileNameExt, fileName))
         if result.failed:
             return False
@@ -53,5 +53,5 @@ def do_deploy(archive_path):
                  .format(fileName))
     if result.failed:
         return False
-    print("New Version Deployed!")
+    print("New version deployed!")
     return True
