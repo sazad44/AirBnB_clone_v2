@@ -19,11 +19,16 @@ def do_deploy(archive_path):
     if result.failed:
         return False
     result = run("rm -rf /data/web_static/releases/{}/".format(fileName))
+    if result.failed:
+        return False
     result = run("mkdir -p /data/web_static/releases/{}/".format(fileName))
     if result.failed:
         return False
     result = run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
                  .format(fileNameExt, fileName))
+    if result.failed:
+        return False
+    result = run("rm /tmp/{}".format(fileNameExt))
     if result.failed:
         return False
     input = "mv /data/web_static/releases/{}/web_static/*\
@@ -35,7 +40,6 @@ def do_deploy(archive_path):
                  .format(fileName))
     if result.failed:
         return False
-    result = run("rm /tmp/{}".format(fileNameExt))
     result = run("rm -rf /data/web_static/current")
     if result.failed:
         return False
