@@ -9,26 +9,43 @@ from datetime import datetime
 env.hosts = ['35.190.184.163', '35.185.88.238']
 
 def do_deploy(archive_path):
-    """
-    uploads archive, uncompresses, and creates new symbolic links
-    """
-    if not os.path.isfile(archive_path):
+    """Deploy function for archive to get deployed to servers"""
+    if not exists(archive_path):
         return False
-    put(archive_path, "/tmp/")
-    splitpath = archive_path.split('/')
-    cp_path = ' /data/web_static/releases/' + (splitpath[-1])[:-4]
-    tmp_path = '/tmp/' + splitpath[-1]
-    if sudo('mkdir -p ' + cp_path).failed:
+    fileNameExt = archive_path.split('/')[-1]
+    fileName = fileNameExt.split(".")[0]
+    result = put(archive_path, '/tmp/{}'.format(fileNameExt))
+    if result.failed:
         return False
-    if sudo("tar -xvf " + tmp_path + ' -C' + cp_path).failed:
+    result = run("rm -rf /data/web_static/releases/{}/".format(fileName))
+    if result.failed:
         return False
-    if sudo('mv ' + cp_path + '/web_static/* ' + cp_path).failed:
+    result = run("mkdir -p /data/web_static/releases/{}/".format(fileName))
+    if result.failed:
         return False
-    if sudo('rm -rf ' + cp_path + '/web_static').failed:
+    result = run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
+                 .format(fileNameExt, fileName))
+    if result.failed:
         return False
-    if sudo('rm -rf /data/web_static/current').failed:
+    result = run("rm /tmp/{}".format(fileNameExt))
+    if result.failed:
         return False
-    if sudo('ln -s ' + cp_path + ' /data/web_static/current').failed:
+    input = "mv /data/web_static/releases/{}/web_static/*\
+    /data/web_static/releases/{}/".format(fileName, fileName)
+    result = run(input)
+    if result.failed:
         return False
-    print('New version deployed!')
+    result = run("rm -rf /data/web_static/releases/{}/web_static"
+                 .format(fileName))
+    if result.failed:
+        return False
+    result = run("rm -rf /data/web_static/current")
+    if result.failed:
+        return False
+    result = run("ln -s /data/web_static/releases/{}/ /data/web_static/current"
+                 .format(fileName))
+    if result.failed:
+        return False
+    print("New version deployed!")
     return True
+    
