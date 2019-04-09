@@ -38,7 +38,7 @@ def do_deploy(archive_path):
     if result.failed:
         return False
     input = "mv /data/web_static/releases/{}/web_static/*\
-    /data/web_static/releases/{}/".format(fileName, fileName)
+ /data/web_static/releases/{}/".format(fileName, fileName)
     result = run(input)
     if result.failed:
         return False
