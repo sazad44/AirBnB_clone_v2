@@ -4,6 +4,7 @@ from os import remove
 from os.path import isfile
 from fabric.api import *
 from datetime import datetime
+import 1-pack_web_static
 
 
 env.hosts = ['35.190.184.163', '35.185.88.238']
