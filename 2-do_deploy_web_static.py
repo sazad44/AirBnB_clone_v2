@@ -29,11 +29,10 @@ def do_deploy(archive_path):
     result = run("mkdir -p /data/web_static/releases/{}/".format(fileName))
     if result.failed:
         return False
-    with cd('/tmp'):
-        result = run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
-                     .format(fileNameExt, fileName))
-        if result.failed:
-            return False
+    result = run("tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
+                 .format(fileNameExt, fileName))
+    if result.failed:
+        return False
     result = run("rm /tmp/{}".format(fileNameExt))
     if result.failed:
         return False
