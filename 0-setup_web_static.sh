@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Shell script to set up server for deployment
-apt-get update
 apt-get -y install nginx
 mkdir -p /data/web_static/releases/test
 mkdir -p /data/web_static/shared
