@@ -21,7 +21,9 @@ def do_deploy(archive_path):
     if not exists(archive_path):
         return False
     fileNameExt = archive_path.split('/')[-1]
+    print(fileNameExt)
     fileName = fileNameExt.split(".")[0]
+    print(fileName)
     result = put(archive_path, '/tmp/{}'.format(fileNameExt))
     if result.failed:
         return False
