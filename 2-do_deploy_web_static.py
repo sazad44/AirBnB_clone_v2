@@ -37,8 +37,9 @@ def do_deploy(archive_path):
     result = run("rm /tmp/{}".format(fileNameExt))
     if result.failed:
         return False
-    input = "mv -f -t /data/web_static/releases/{}/ /data/web_static/releases/{}/web_static/*".format(fileName, fileName)
-    result = sudo(input)
+    input = "mv /data/web_static/releases/{}/web_static/*\
+    /data/web_static/releases/{}/*".format(fileName, fileName)
+    result = run(input)
     if result.failed:
         return False
     result = run("rm -rf /data/web_static/releases/{}/web_static"
@@ -48,8 +49,8 @@ def do_deploy(archive_path):
     result = run("rm -rf /data/web_static/current")
     if result.failed:
         return False
-    result = run("ln -sf /data/web_static/releases/{}/ /data/web_static/current"
-        .format(fileName))
+    result = run("ln -s /data/web_static/releases/{}/ /data/web_static/current"
+                 .format(fileName))
     if result.failed:
         return False
     print("New Version Deployed!")
