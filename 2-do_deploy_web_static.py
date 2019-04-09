@@ -20,7 +20,7 @@ def do_deploy(archive_path):
     """Deploy function for archive to get deployed to servers"""
     if not exists(archive_path):
         return False
-    fileNameExt = archive_path.split('/')[1]
+    fileNameExt = archive_path.split('/')[-1]
     fileName = fileNameExt.split(".")[0]
     result = put(archive_path, '/tmp/{}'.format(fileNameExt))
     if result.failed:
