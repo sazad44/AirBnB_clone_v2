@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Fab file to archive web_static content"""
+from os import remove
 from os.path import exists
 from fabric.api import *
 from datetime import datetime
@@ -8,25 +9,17 @@ from datetime import datetime
 env.hosts = ['35.190.184.163', '35.185.88.238']
 
 
-def do_pack():
-    """Pack web_static files into archive"""
-    dt = datetime.now().strftime("%Y%m%d%H%M%S")
-    local("mkdir -p versions/")
-    path = local("tar -cvzf versions/web_static_{}.tgz web_static".format(dt))
-    return path
-
-
 def do_deploy(archive_path):
     """Deploy function for archive to get deployed to servers"""
     if not exists(archive_path):
         return False
     fileNameExt = archive_path.split('/')[-1]
-    print(fileNameExt)
     fileName = fileNameExt.split(".")[0]
-    print(fileName)
     result = put(archive_path, '/tmp/{}'.format(fileNameExt))
     if result.failed:
         return False
+    if exists("/data/web_static/releases/{}/*".format(fileName)):
+        result = run("rm -rf /data/web_static/releases/{}/*".format(fileName))
     result = run("mkdir -p /data/web_static/releases/{}/".format(fileName))
     if result.failed:
         return False
@@ -43,6 +36,7 @@ def do_deploy(archive_path):
                  .format(fileName))
     if result.failed:
         return False
+    result = run("rm /tmp/{}".format(fileNameExt))
     result = run("rm -rf /data/web_static/current")
     if result.failed:
         return False
