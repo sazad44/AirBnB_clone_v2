@@ -9,7 +9,8 @@ def do_pack():
     try:
         dt = datetime.now().strftime("%Y%m%d%H%M%S")
         local("mkdir -p versions/")
-        path = local("tar -cvzf versions/web_static_{}.tgz web_static".format(dt))
+        path = local("tar -cvzf versions/web_static_{}.tgz web_static"
+                     .format(dt))
         return "versions/web_static_{}.tgz"
     except:
         return None

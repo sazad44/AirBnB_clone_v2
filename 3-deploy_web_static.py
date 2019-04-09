@@ -14,10 +14,12 @@ def do_pack():
     try:
         dt = datetime.now().strftime("%Y%m%d%H%M%S")
         local("mkdir -p versions/")
-        path = local("tar -cvzf versions/web_static_{}.tgz web_static".format(dt))
+        path = local("tar -cvzf versions/web_static_{}.tgz web_static"
+                     .format(dt))
         return "versions/web_static_{}.tgz".format(dt)
     except:
         return None
+
 
 def do_deploy(archive_path):
     """Deploy function for archive to get deployed to servers"""
@@ -59,6 +61,7 @@ def do_deploy(archive_path):
         return False
     print("New version deployed!")
     return True
+
 
 def deploy():
     """Call pack and deploy"""
