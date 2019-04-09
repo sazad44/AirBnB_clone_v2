@@ -8,6 +8,7 @@ from datetime import datetime
 
 env.hosts = ['35.190.184.163', '35.185.88.238']
 
+
 def do_deploy(archive_path):
     """Deploy function for archive to get deployed to servers"""
     if not exists(archive_path):
@@ -48,4 +49,3 @@ def do_deploy(archive_path):
         return False
     print("New version deployed!")
     return True
-    
