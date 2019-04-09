@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Fab file to archive web_static content"""
 from os import remove
-from os.path import exists
+from os.path import isfile
 from fabric.api import *
 from datetime import datetime
 
@@ -11,7 +11,7 @@ env.hosts = ['35.190.184.163', '35.185.88.238']
 
 def do_deploy(archive_path):
     """Deploy function for archive to get deployed to servers"""
-    if not exists(archive_path):
+    if not isfile(archive_path):
         return False
     fileNameExt = archive_path.split('/')[-1]
     fileName = fileNameExt.split(".")[0]
