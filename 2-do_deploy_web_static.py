@@ -18,8 +18,7 @@ def do_deploy(archive_path):
     result = put(archive_path, '/tmp/{}'.format(fileNameExt))
     if result.failed:
         return False
-    if exists("/data/web_static/releases/{}/*".format(fileName)):
-        result = run("rm -rf /data/web_static/releases/{}/*".format(fileName))
+    result = run("rm -rf /data/web_static/releases/{}/".format(fileName))
     result = run("mkdir -p /data/web_static/releases/{}/".format(fileName))
     if result.failed:
         return False
