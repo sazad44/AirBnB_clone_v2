@@ -77,9 +77,10 @@ def do_clean(number=0):
     if result.failed:
         return False
     result = result.split('\n')
-    if number == 0:
-        number = 1
-    result = result[int(number) + 1:]
+    numBer = number
+    if number == '0':
+        numBer = 1
+    result = result[int(numBer) + 1:]
     for line in result:
         res = local("rm versions/{}".format(line[-29:]))
         if res.failed:
@@ -88,8 +89,8 @@ def do_clean(number=0):
     if result.failed:
         return False
     result = result.split('\n')
-    result = result[int(number) + 1:]
+    result = result[int(numBer) + 1:]
     for line in result:
         if "web_static" in line[-26:]:
-            sudo("rm -rf /data/web_static/releases/{}/".format(line[-26:]))
+            sudo("rm -rf /data/web_static/releases/{}/".format(line[-26:-1]))
     return True
