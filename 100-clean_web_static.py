@@ -89,8 +89,8 @@ def do_clean(number=0):
     if result.failed:
         return False
     result = result.split('\n')
-    result = result[int(numBer) + 1:]
+    result = result[1:-(int(numBer) + 1)]
     for line in result:
         if "web_static" in line[-26:]:
-            sudo("rm -rf /data/web_static/releases/{}/".format(line[-26:-1]))
+            run("rm -rf /data/web_static/releases/{}/".format(line[-26:-1]))
     return True
