@@ -80,7 +80,7 @@ def do_clean(number=0):
     numBer = number
     if number == '0':
         numBer = 1
-    result = result[1:-(int(numBer))]
+    result = result[int(numBer) + 1:]
     for line in result:
         res = local("rm versions/{}".format(line[-29:]))
         if res.failed:
