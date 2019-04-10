@@ -91,5 +91,5 @@ def do_clean(number=0):
     result = result[int(number) + 1:]
     for line in result:
         if "web_static" in line[-26:]:
-            sudo("rm -rf /data/web_static/releases/{}/".format(line[-26:-1]))
+            sudo("rm -rf /data/web_static/releases/{}/".format(line[-26:]))
     return True
