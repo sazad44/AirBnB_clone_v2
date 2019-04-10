@@ -84,4 +84,12 @@ def do_clean(number=0):
         res = local("rm versions/{}".format(line[-29:]))
         if res.failed:
             return False
+    result = run("ls -lt /data/web_static/releases/")
+    if result.failed:
+        return False
+    result = result.split('\n')
+    result = result[int(number) + 1:-1]
+    for line in result:
+        if "web_static" in line[-26:]:
+            sudo("rm -rf /data/web_static/releases/{}/".format(line[-26:]))
     return True
