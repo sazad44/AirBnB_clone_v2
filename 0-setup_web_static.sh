@@ -1,23 +1,30 @@
 #!/usr/bin/env bash
-# Shell script to set up server for deployment
+#Set Up NGINX server to return a page that contains string
+
 apt-get -y install nginx
-mkdir -p /data/web_static/releases/test
-mkdir -p /data/web_static/shared
-echo "TEST TEST TEST" | tee /data/web_static/releases/test/index.html
-ln -sf /data/web_static/releases/test /data/web_static/current
-chown -R ubuntu:ubuntu /data/
+mkdir -p /data/www
+echo "Holberton School for the win!" > index.html
+echo "Ceci n'est pas une page it's a 404!" > 404.html
+cp index.html /data/www/
+cp 404.html /data/www/
 cat > default <<EOF
 server {
     listen 80 default_server;
-    index index.html index.htm index;
-
+    root /data/www;
+    error_page 404 /404.html;
     location / {
-        alias /data/web_static;
-}
+        index index.html index.html;
+    }
     location /hbnb_static {
         alias /data/web_static/current;
-   }
+    }
+    location = /404.html {
+        internal;
+    }
+    location /redirect_me {
+       return 301 https://google.com;
+    }
 }
 EOF
-mv default /etc/nginx/sites-available/default
+cp default /etc/nginx/sites-available/default
 sudo service nginx restart
