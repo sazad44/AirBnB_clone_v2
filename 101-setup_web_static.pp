@@ -59,7 +59,9 @@ file { '/etc/nginx/sites-available/default':
 
 file { '/data/web_static/current':
     ensure => 'link',
-    target => '/data/web_static/releases/test/'
+    target => '/data/web_static/releases/test/',
+    owner  => 'root',
+    group  => 'root'
 }
 
 exec { 'restart nginx':
