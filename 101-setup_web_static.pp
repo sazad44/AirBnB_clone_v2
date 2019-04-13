@@ -11,7 +11,10 @@ package { 'nginx':
 
 file { [ '/data', '/data/web_static']:
   ensure => 'directory',
+  owner  => 'root',
+  group  => 'root'
 }
+
 file { ['/data/www', '/data/web_static/releases', '/data/web_static/shared', '/data/web_static/releases/test']:
   ensure  => 'directory',
   owner   => 'ubuntu',
