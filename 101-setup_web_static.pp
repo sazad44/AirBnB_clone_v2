@@ -1,3 +1,5 @@
+# Configures server for nginx and serving content at resource path hbnb_static
+
 exec { 'apt-get update':
   command => '/usr/bin/apt-get update'
 }
