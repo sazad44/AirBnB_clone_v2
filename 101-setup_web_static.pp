@@ -9,10 +9,14 @@ package { 'nginx':
   require => Exec['apt-get update']
 }
 
-file { ['/data', '/data/www', '/data/web_static', '/data/web_static/releases', '/data/web_static/shared', '/data/web_static/releases/test']:
+file { [ '/data', '/data/web_static']:
   ensure => 'directory',
-  owner  => 'ubuntu',
-  group  => 'ubuntu'
+}
+file { ['/data/web_static/releases', '/data/web_static/shared', '/data/web_static/releases/test']:
+  ensure  => 'directory',
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
+  require => File['/data/web_static']
 }
 
 file { '/data/web_static/releases/test/index.html':
