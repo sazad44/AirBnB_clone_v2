@@ -11,20 +11,20 @@ package { 'nginx':
 
 file { [ '/data', '/data/web_static']:
   ensure => 'directory',
-  owner  => 'root',
-  group  => 'root'
+  owner  => 'ubuntu',
+  group  => 'ubuntu'
 }
 
 file { ['/data/www', '/data/web_static/releases', '/data/web_static/shared', '/data/web_static/releases/test']:
   ensure  => 'directory',
-  owner   => 'ubuntu',
-  group   => 'ubuntu',
+  owner   => 'root',
+  group   => 'root',
   require => File['/data/web_static']
 }
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
-  content => 'Holberton School for the win!',
+  content => 'Holberton School for the win!\n',
   require => File['/data/web_static/releases/test']
 }
 
