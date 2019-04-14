@@ -26,14 +26,16 @@ file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
   content => 'Holberton School for the win!',
   require => File['/data/web_static/releases/test'],
-  owner => 'ubuntu',
-  group => 'ubuntu'
+  owner   => 'ubuntu',
+  group   => 'ubuntu'
 }
 
 file { '/data/web_static/releases/test/404.html':
   ensure  => 'present',
   content => 'Ceci n\'est pas une page it\'s a 404!',
-  require => File[ '/data/web_static' ]
+  require => File[ '/data/web_static' ],
+  owner   => 'ubuntu',
+  group   => 'ubuntu'
 }
 
 $cont="server {
@@ -74,5 +76,5 @@ exec { 'restart nginx':
 
 exec { 'rm':
   command => 'rm -rf /data/www /data/web_static/current/test',
-  path => '/bin/'
+  path    => '/bin/'
 }
