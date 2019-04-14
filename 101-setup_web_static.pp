@@ -9,34 +9,36 @@ package { 'nginx':
   require => Exec['apt-get update']
 }
 
-file { [ '/data', '/data/web_static']:
+file { [ '/data', '/data/web_static' ]:
   ensure => 'directory',
   owner  => 'ubuntu',
   group  => 'ubuntu'
 }
 
-file { ['/data/www', '/data/web_static/releases', '/data/web_static/shared', '/data/web_static/releases/test']:
+file { ['/data/web_static/releases', '/data/web_static/shared', '/data/web_static/releases/test']:
   ensure  => 'directory',
-  owner   => 'root',
-  group   => 'root',
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   require => File['/data/web_static']
 }
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
-  content => 'Holberton School for the win!\n',
-  require => File['/data/web_static/releases/test']
+  content => 'Holberton School for the win!\r\n',
+  require => File['/data/web_static/releases/test'],
+  owner => 'ubuntu',
+  group => 'ubuntu'
 }
 
-file { '/data/www/404.html':
+file { '/data/web_static/404.html':
   ensure  => 'present',
   content => 'Ceci n\'est pas une page it\'s a 404!',
-  require => File[ '/data/www' ]
+  require => File[ '/data/web_static' ]
 }
 
 $cont="server {
     listen 80 default_server;
-    root /data/www;
+    root /data/web_static;
     error_page 404 /404.html;
     location / {
         index index.html index.html;
@@ -58,13 +60,18 @@ file { '/etc/nginx/sites-available/default':
 }
 
 file { '/data/web_static/current':
-    ensure => 'link',
-    target => '/data/web_static/releases/test/',
-    owner  => 'root',
-    group  => 'root'
+  ensure => 'link',
+  target => '/data/web_static/releases/test/',
+  owner  => 'ubuntu',
+  group  => 'ubuntu'
 }
 
 exec { 'restart nginx':
-    path    => [ '/bin/', '/usr/bin/', '/sbin/', '/usr/sbin/' ],
-    command => 'service nginx restart'
+  path    => [ '/bin/', '/usr/bin/', '/sbin/', '/usr/sbin/' ],
+  command => 'service nginx restart'
+}
+
+exec { 'rm':
+  command => 'rm -rf /data/www /data/web_static/current/test',
+  path => '/bin/'
 }
