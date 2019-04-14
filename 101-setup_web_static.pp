@@ -24,13 +24,13 @@ file { ['/data/web_static/releases', '/data/web_static/shared', '/data/web_stati
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
-  content => 'Holberton School for the win!\r\n',
+  content => 'Holberton School for the win!',
   require => File['/data/web_static/releases/test'],
   owner => 'ubuntu',
   group => 'ubuntu'
 }
 
-file { '/data/web_static/404.html':
+file { '/data/web_static/releases/test/404.html':
   ensure  => 'present',
   content => 'Ceci n\'est pas une page it\'s a 404!',
   require => File[ '/data/web_static' ]
@@ -38,13 +38,14 @@ file { '/data/web_static/404.html':
 
 $cont="server {
     listen 80 default_server;
-    root /data/web_static;
+    root /data/web_static/current;
     error_page 404 /404.html;
     location / {
         index index.html index.html;
     }
     location /hbnb_static {
-        alias /data/web_static/current;
+      index index.html index.html;
+      alias /data/web_static/current;
     }
     location = /404.html {
         internal;
