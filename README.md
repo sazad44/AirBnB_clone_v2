@@ -1,11 +1,11 @@
 # 0x03 AirBnB: Deploy Static - Work In Progress
-This project was forked as a project specification at Holberton School\
-to learn about working with a different codebase.
-The original project I worked on with Brennan Baraban is at\
-```https://github.com/sazad44/AirBnB_clone.```
+This project was forked as a project specification at Holberton School to learn
+about working with a different codebase.
+**The original project I worked on with Brennan Baraban (github.com/bdbaraban)
+is at ```https://github.com/sazad44/AirBnB_clone.```**
 That project was our initial console implementation.
-This current project was focusing on deploying content to a server and\
-updating the console.
+This current project was focusing on deploying content to a server and updating
+the console.
 ## Set-Up
 ### Server Config
 Setting up the server with the correct configuration can be accomplished with
