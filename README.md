@@ -1,6 +1,6 @@
 # 0x03 AirBnB: Deploy Static - Work In Progress
-This project was forked as a project specification at Holberton School to learn
-about working with a different codebase.
+**Attention:** This project was forked as a project specification at Holberton
+School to learn about working with a different codebase.
 **The original project I worked on with Brennan Baraban (github.com/bdbaraban)
 is at ```https://github.com/sazad44/AirBnB_clone.```**
 That project was our initial console implementation.
