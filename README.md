@@ -13,3 +13,21 @@ Using Fabric, files can be pushed up to the server by:
 * IMPORTANT: ```env.hosts``` needs to be edited inside of
 ```3-deploy_web_static.py``` to reflext the IP(s) of the servers being
 deployed to.
+### MySQL
+Setup the MySQL server with ```setup_mysql_dev.sql``` using:
+```cat setup_mysql_dev.sql | mysql -uroot -p```
+Setup environment for DataBase usage with ```./export_setup```
+Interact with the database through ```./console.py```
+#### Commands
+```Classes: User, State, City, Amenity, Place, Review```
+```create <Class> [attribute=[value]]```, ```show <Class> <id>```,
+```destroy <Class> <id>```, ```all <Class>```,
+```update <Class> <id> [dictionary of attribute updates]```,
+```count <Class>```
+## Directories
+### models
+Python files for different classes and storage engines.
+### tests
+Unittests for classes and console.
+### web_static
+HTML/CSS files for webpage.
