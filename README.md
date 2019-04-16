@@ -1,4 +1,11 @@
 # 0x03 AirBnB: Deploy Static - Work In Progress
+This project was forked as a project specification at Holberton School\
+to learn about working with a different codebase.
+The original project I worked on with Brennan Baraban is at\
+```https://github.com/sazad44/AirBnB_clone.```
+That project was our initial console implementation.
+This current project was focusing on deploying content to a server and\
+updating the console.
 ## Set-Up
 ### Server Config
 Setting up the server with the correct configuration can be accomplished with
@@ -20,10 +27,25 @@ Setup environment for DataBase usage with ```./export_setup```
 Interact with the database through ```./console.py```
 #### Commands
 ```Classes: User, State, City, Amenity, Place, Review```
-```create <Class> [attribute=[value]]```, ```show <Class> <id>```,
-```destroy <Class> <id>```, ```all <Class>```,
-```update <Class> <id> [dictionary of attribute updates]```,
+
+Creates Class with attributes specified.
+```create <Class> [attribute=[value]]```
+
+Shows Class with id specified.
+```show <Class> <id>```
+
+Destroys Class with id specified.
+```destroy <Class> <id>```
+
+Shows all objects of a certain Class.
+```all <Class>```
+
+Updates object of certain Class with id specified with attributes specified.
+```update <Class> <id> [dictionary of attribute updates]```
+
+Counts number of objects with specified Class.
 ```count <Class>```
+
 ## Directories
 ### models
 Python files for different classes and storage engines.
