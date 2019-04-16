@@ -10,6 +10,6 @@ A poorer version can be setup with bash.
 Using Fabric, files can be pushed up to the server by:
 1. Packing files into an archive and deploying them to the server.
 ```fab -f 3-deploy_web_static.py deploy -i ssh_private_key -u ubuntu```
-       * IMPORTANT: ```env.hosts``` needs to be edited inside of
-       ```3-deploy_web_static.py``` to reflext the IP(s) of the servers being
-       deployed to.
+* IMPORTANT: ```env.hosts``` needs to be edited inside of
+```3-deploy_web_static.py``` to reflext the IP(s) of the servers being
+deployed to.
