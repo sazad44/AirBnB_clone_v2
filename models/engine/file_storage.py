@@ -2,12 +2,11 @@
 """This is the file storage class for AirBnB"""
 import json
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
 from models.place import Place
+from models.city import City
+from models.state import State
 from models.review import Review
+from models.user import User
 
 
 class FileStorage:
@@ -71,3 +70,7 @@ class FileStorage:
         key = "{}.{}".format(type(obj).__name__, obj.id)
         if key in self.__objects.keys():
             del self.__objects[key]
+
+    def close(self):
+        """reload before exiting the session"""
+        self.reload()

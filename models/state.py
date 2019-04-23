@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 """This is the state class"""
+import json
+from os import getenv
+import models
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
@@ -12,12 +15,15 @@ class State(BaseModel, Base):
     """
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
-    cities = relationship("City", backref=backref("State", cascade="delete"))
+    cities = relationship("City",
+                          backref=backref("State", cascade="delete"))
 
-    @property
-    def cities(self):
-        """returns list of city
-        instances with
-        matching state_id
-        """
-        return [c for c in cities if c.state_id == self.id]
+    if (getenv('HBNB_TYPE_STORAGE') != "db"):
+        @property
+        def cities(self):
+            """returns list of city
+            instances with
+            matching state_id
+            """
+            cityObjs = models.storage.all('City').values()
+            return [c for c in cityObjs if c.state_id == self.id]
