@@ -17,7 +17,7 @@ def tearDown(error):
 def states_list():
     """Lists states in database"""
     return render_template("7-states_list.html",
-                           state_list = storage.all("State"))
+                           state_list=storage.all("State"))
 
 
 if __name__ == "__main__":
