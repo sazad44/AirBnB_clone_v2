@@ -9,6 +9,7 @@ from models.city import City
 from models.state import State
 from models.user import User
 from models.review import Review
+from models.amenity import Amenity
 
 
 class DBStorage:
@@ -34,8 +35,11 @@ class DBStorage:
         if cls:
             classList = [cls]
         for cls in classList:
-            objs = self.__session.query(eval(cls)).all()
-            obj_list.extend(objs)
+            if type(cls) == str:
+                objs = self.__session.query(eval(cls)).all()
+            else:
+                objs = self.__session.query(cls).all()
+                obj_list.extend(objs)
         retdict = {}
         for obj in obj_list:
             retdict["{}.{}".format(cls, obj.id)] = obj
