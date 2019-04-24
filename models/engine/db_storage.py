@@ -39,7 +39,7 @@ class DBStorage:
                 objs = self.__session.query(eval(cls)).all()
             else:
                 objs = self.__session.query(cls).all()
-                obj_list.extend(objs)
+            obj_list.extend(objs)
         retdict = {}
         for obj in obj_list:
             retdict["{}.{}".format(cls, obj.id)] = obj
