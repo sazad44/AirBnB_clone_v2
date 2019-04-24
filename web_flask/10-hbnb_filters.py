@@ -41,7 +41,7 @@ def states_select(state_id):
 
 
 @app.route("/hbnb_filters", strict_slashes=False)
-def hbnb_filters(state_id):
+def hbnb_filters():
     """Returns template of AirBnB"""
     return render_template("10-hbnb_filters.html",
                            state_list=storage.all("State"),
