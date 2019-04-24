@@ -30,9 +30,9 @@ class BaseModel:
         if kwargs:
             if 'id' not in self.__dict__.keys():
                 self.id = str(uuid.uuid4())
-            if 'created at' not in self.__dict__.keys():
+            if 'created_at' not in self.__dict__.keys():
                 self.created_at = datetime.now()
-            if 'updated at' not in self.__dict__.keys():
+            if 'updated_at' not in self.__dict__.keys():
                 self.updated_at = datetime.now()
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
